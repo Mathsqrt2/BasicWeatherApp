@@ -1,0 +1,18 @@
+.appFooter {
+	color: white;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	min-height: 60pt;
+	padding: 50px;
+
+	border-top: 6pt solid rgb(62, 130, 255);
+	background-color: #313131;
+}
+
+.appAuthor{
+    user-select: none;
+}

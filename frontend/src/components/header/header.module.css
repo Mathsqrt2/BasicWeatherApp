@@ -1,0 +1,28 @@
+.appHeader {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+
+	width: 100%;
+	height: 80pt;
+	padding: 20px 30px;
+
+	background: linear-gradient(0, hsl(215, 100%, 61%), hsl(215, 65%, 46%));
+	box-shadow: 0 0 32px rgba(0, 0, 0, 0.35);
+	position: relative;
+	z-index: 100;
+}
+
+.appTitle {
+	font-size: x-large;
+	user-select: none;
+	font-weight: 800;
+	text-wrap: nowrap;
+	text-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+	color: white;
+}
+
+.appNavigation {
+	color: white;
+}

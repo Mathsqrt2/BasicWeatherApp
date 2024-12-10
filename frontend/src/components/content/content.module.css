@@ -1,0 +1,6 @@
+.appContent {
+
+
+	min-height: calc(100dvh - 70pt);
+    background-color: rgb(230, 230, 230);
+}
