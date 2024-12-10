@@ -169,7 +169,7 @@ export class WeatherService {
     }
 
     private formatWeatherResponse = (res: WeatherResponse, city: string): WeatherReport => {
-  
+
         const report: WeatherReport = {
             weather_conditions: this.recognizeImportantConditions(res),
             recommended_activity: this.prepareRecommendations(res),
@@ -190,7 +190,6 @@ export class WeatherService {
             order: { timestamp: `DESC` }
         })
 
-
         if (cachedResponse) {
             this.query.save({ ...query, weather_id: cachedResponse.id });
             return cachedResponse;
@@ -203,6 +202,7 @@ export class WeatherService {
             [latitude, longitude] = await this.findCoordsByName(city);
 
         } catch (err) {
+            await this.query.delete(query.id);
             throw new InternalServerErrorException(err);
         }
 
@@ -210,6 +210,7 @@ export class WeatherService {
         try {
             currentWeather = await this.findWeatherByCords(latitude, longitude);
         } catch (err) {
+            await this.query.delete(query.id);
             throw new InternalServerErrorException(err);
         }
 

@@ -17,9 +17,12 @@ export const Summary: FC<SummaryProps> = (props) => {
             <h3 className={style.sectionBreaker}>Weather conditions</h3>
             <p> {props.data.weather_conditions} </p>
         </div>
-        <div>
-            <h3>Recommendation</h3>
-            <p> {props.data.recommended_activity}</p>
-        </div>
+        {props.data.recommended_activity ?
+            <div>
+                <h3>Recommendation</h3>
+                <p> {props.data.recommended_activity}</p>
+            </div>
+            : null
+        }
     </div>
 }

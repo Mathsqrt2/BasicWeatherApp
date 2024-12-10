@@ -92,8 +92,7 @@ export const StatsPage: FC = () => {
             <h3>Last 10 requests</h3>
             <ul className={style.list}>
                 {userRequests.map((city, i) => (
-                    <li key={i} className={style.listElement}><p>{i + 1}) {city.city} ({new Date(city.timestamp)
-                        .toLocaleDateString(`pl-PL`)} - {city.assignedWeather.recommended_activity})
+                    <li key={i} className={style.listElement}><p>{i + 1}) {city.city} ({new Date(city.timestamp).toLocaleDateString(`pl-PL`)}) - {city?.assignedWeather ? city.assignedWeather.recommended_activity : 'No activity recommendations'}
                     </p></li>))}
             </ul>
         </div>
