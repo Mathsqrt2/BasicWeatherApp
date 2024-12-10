@@ -1,9 +1,9 @@
 .env
 node_modules
-/dist
-/tmp
-/out-tsc
-/bazel-out
+dist
+tmp
+out-tsc
+bazel-out
 
 
 node_modules
@@ -26,13 +26,13 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-/.angular/cache
+.angular/cache
 .sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
+connect.lock
+coverage
+libpeerconnection.log
 testem.log
-/typings
+typings
 
 .DS_Store
 Thumbs.db

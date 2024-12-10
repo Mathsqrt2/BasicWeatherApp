@@ -8,6 +8,7 @@ import { Summary } from "./summary/summary.component";
 export const Homepage: FC = () => {
 
     const [city, setCity] = useState<string>(``);
+    const [isCityDefined, setIsCityDefined] = useState<boolean>(false);
 
     const checkWeatherForCity = async (e: React.MouseEvent): Promise<void> => {
         e.preventDefault();
@@ -15,6 +16,7 @@ export const Homepage: FC = () => {
         try {
 
             const response = await Axios.get(`${window.location.origin}/api/weather/${city}`);
+            setIsCityDefined(true);
             console.log(`success`, response);
 
         } catch (err) {
@@ -36,6 +38,7 @@ export const Homepage: FC = () => {
 
                         <input
                             type="text"
+                            value={city}
                             onChange={(e) => setCity(e.target.value)}
                             className={style.cityInput}
                         />
@@ -53,7 +56,7 @@ export const Homepage: FC = () => {
 
             </form>
 
-            <div>
+            { isCityDefined ? <div>
 
                 <h3>
                     Summary
@@ -61,7 +64,7 @@ export const Homepage: FC = () => {
 
                 <Summary />
 
-            </div>
+            </div> : null}
 
         </div>
     )
