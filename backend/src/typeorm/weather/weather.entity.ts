@@ -1,4 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column, Entity, JoinColumn,
+    OneToMany, PrimaryGeneratedColumn
+} from "typeorm";
+import { Query } from "../query/query.entity";
 
 @Entity(`weather`)
 export class Weather {
@@ -20,5 +24,9 @@ export class Weather {
 
     @Column()
     timestamp: number;
+
+    @OneToMany(() => Query, query => query.assignedWeather)
+    @JoinColumn()
+    requests: Query[];
 
 }

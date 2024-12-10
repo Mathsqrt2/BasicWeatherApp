@@ -27,6 +27,7 @@ export type WeatherResponse = {
             sea_level: number;
             grnd_level: number;
         }
+        visibility: number;
         wind: {
             speed: number;
             deg: number;
@@ -49,7 +50,7 @@ export type WeatherResponse = {
 }
 
 export type WeatherReport = {
-    weather_conditions: string; //  rain, clear, snow
+    weather_conditions: string;
     recommended_activity: string;
     temperature: number;
     city: string;
