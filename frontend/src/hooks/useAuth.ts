@@ -2,10 +2,9 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { Credentials } from "../types/auth.types";
 
-export default function useAuth() {
+export default function useAuth(): [Credentials, (props: Credentials) => void] {
 
     const authContext = useContext(AuthContext)
-    const auth = authContext.isAuthenticated;
 
     const setAuth = ({ isAuthenticated, username, token }: Credentials): void => {
         isAuthenticated === true ?
@@ -13,5 +12,5 @@ export default function useAuth() {
             authContext.logout();
     }
 
-    return [auth, setAuth];
+    return [authContext, setAuth];
 }

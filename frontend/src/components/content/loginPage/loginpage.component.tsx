@@ -1,9 +1,14 @@
 import { FC, useState } from "react";
 import Axios from 'axios';
 import style from "./loginPage.module.css";
+import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { setCookie } from "../../utils/cookies";
 
 
 export const LoginPage: FC = () => {
+
+    const navigate = useNavigate();
 
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
     const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
@@ -13,6 +18,8 @@ export const LoginPage: FC = () => {
 
     const [isError, setIsError] = useState<boolean>(false);
     const [login, setLogin] = useState<string>("");
+
+    const [_, setAuth] = useAuth();
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
@@ -45,17 +52,21 @@ export const LoginPage: FC = () => {
             return false;
         }
 
-        cleanInputs();
-
         try {
-            const response = await Axios.post(`${window.location.origin}/api/login`, { login, password });
+            const response = await Axios.post(`http://localhost:3002/api/login`, { login, password });
 
             if (response.status !== 200) {
                 throw new Error(`Invalid response`);
             }
 
+            setAuth({ isAuthenticated: true, username: login, token: response.data });
+            localStorage.jwt = response.data;
+            localStorage.username = login
+            setCookie('jwt', response.data, 7);
+            navigate('/stats');
+            cleanInputs();
+
         } catch (err) {
-            console.log(err);
             setIsError(true);
             return false;
         }

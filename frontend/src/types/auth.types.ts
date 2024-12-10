@@ -1,7 +1,7 @@
 export type Credentials = {
     isAuthenticated: boolean;
-    username: string;
-    token: string;
+    username?: string;
+    token?: string;
 }
 
 export type Auth = Credentials & {

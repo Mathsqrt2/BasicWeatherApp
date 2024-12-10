@@ -1,0 +1,10 @@
+.summaryWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 6pt;
+	padding-top: 30pt;
+}
+.paragraph {
+	margin: 4pt;
+}

@@ -1,7 +1,7 @@
-import { Controller, Get, HttpStatus, Inject, Res } from "@nestjs/common";
-import { Request, Response } from "express";
+import { Controller, Get, HttpStatus, Inject, Res, UseGuards } from "@nestjs/common";
+import { Response } from "express";
+import { AuthGuard } from "src/auth/auth.guard";
 import { Query } from "src/typeorm/query/query.entity";
-import { Weather } from "src/typeorm/weather/weather.entity";
 import { Repository } from "typeorm";
 
 @Controller("api/stats")
@@ -9,26 +9,23 @@ export class StatsController {
 
     constructor(
         @Inject(`QUERY`) private readonly query: Repository<Query>,
-        @Inject(`WEATHER`) private readonly weather: Repository<Weather>,
     ) { }
 
-    private findRelations = (model: Repository<Query | Weather>): string[] => {
-        const metadata = model.manager.connection.getMetadata(model.target);
-        return metadata.relations.map(relation => relation.propertyName);
-    }
-
-    @Get("top/requests")
+    @UseGuards(AuthGuard)
+    @Get("requests")
     async findTotalRequestsNumber(
         @Res() res: Response,
     ) {
         try {
-            res.status(HttpStatus.FOUND).json(await this.query.count());
+            const data = await this.query.count();
+            return res.status(HttpStatus.OK).json({ count: data });
         } catch (err) {
             console.error(`Failed to read database.`);
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    @UseGuards(AuthGuard)
     @Get("top/cities")
     async findTopFiveCities(
         @Res() res: Response,
@@ -43,13 +40,14 @@ export class StatsController {
                 .limit(5)
                 .getRawMany();
 
-            res.status(HttpStatus.FOUND).json(topCities);
+            res.status(HttpStatus.OK).json(topCities);
         } catch (err) {
             console.error(`Failed to read database.`);
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    @UseGuards(AuthGuard)
     @Get("latest/requests")
     async findLastTenRequests(
         @Res() res: Response,
@@ -60,8 +58,8 @@ export class StatsController {
                 take: 10,
                 relations: [`assignedWeather`],
             })
-            
-            res.status(HttpStatus.FOUND).json(queries);
+
+            res.status(HttpStatus.OK).json(queries);
         } catch (err) {
             console.error(`Failed to read database. Error: ${err}`);
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -3,24 +3,49 @@ import style from './homepage.module.css';
 import Axios from 'axios';
 import { Summary } from "./summary/summary.component";
 
-
+export type WeatherReport = {
+    weather_conditions: string;
+    recommended_activity: string;
+    temperature: number;
+    city: string;
+    timestamp: number;
+}
 
 export const Homepage: FC = () => {
 
     const [city, setCity] = useState<string>(``);
+    const [currentCityReport, setCurrentCityReport] = useState<WeatherReport | null>(null);
     const [isCityDefined, setIsCityDefined] = useState<boolean>(false);
+    const [cityNameError, setCityNameError] = useState<boolean>(false);
 
     const checkWeatherForCity = async (e: React.MouseEvent): Promise<void> => {
         e.preventDefault();
 
+        if (city.length <= 2) {
+
+            setCityNameError(true);
+            return;
+        } else {
+            setCityNameError(false);
+        }
+
+        let isSuccess: boolean = false;
         try {
 
-            const response = await Axios.get(`${window.location.origin}/api/weather/${city}`);
-            setIsCityDefined(true);
-            console.log(`success`, response);
+            const response = await Axios.get<WeatherReport>(`http://localhost:3002/api/weather/${city}`);
+
+            if (response.status !== 200) {
+                isSuccess = false;
+                setIsCityDefined(isSuccess);
+                return;
+            }
+
+            isSuccess = true;
+            setIsCityDefined(isSuccess);
+            setCurrentCityReport(response.data);
 
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
 
     }
@@ -52,19 +77,13 @@ export const Homepage: FC = () => {
 
                     </div>
 
+                    {cityNameError ? <div className="error">Incorrect city name</div> : null}
+
                 </div>
 
             </form>
 
-            { isCityDefined ? <div>
-
-                <h3>
-                    Summary
-                </h3>
-
-                <Summary />
-
-            </div> : null}
+            {isCityDefined && currentCityReport ? <Summary data={currentCityReport} /> : null}
 
         </div>
     )

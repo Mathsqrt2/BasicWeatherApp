@@ -55,5 +55,4 @@ export type WeatherReport = {
     temperature: number;
     city: string;
     timestamp: number;
-
 }
