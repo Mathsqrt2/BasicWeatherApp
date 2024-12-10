@@ -57,8 +57,6 @@ export class WeatherService {
         const TOO_COLD_TEMPERATURE = 10;
         const VERY_COLD_TEMPERATURE = 0;
 
-        console.log(temperature);
-
         if (temperature >= TOO_HOT_TEMPERATURE) {
             return 4;
         }

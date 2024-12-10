@@ -53,7 +53,7 @@ export const LoginPage: FC = () => {
         }
 
         try {
-            const response = await Axios.post(`http://localhost:3002/api/login`, { login, password });
+            const response = await Axios.post(`http://backend:3002/api/login`, { login, password }, { headers: { "Content-Type": "application/json" } });
 
             if (response.status !== 200) {
                 throw new Error(`Invalid response`);

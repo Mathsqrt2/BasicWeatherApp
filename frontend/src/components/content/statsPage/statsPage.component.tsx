@@ -24,39 +24,39 @@ type UserRequest = {
     weather_id: number;
 }
 
+let retryNumber: number = 20;
 export const StatsPage: FC = () => {
 
-    let retryNumber: number = 5;
     const [count, setCount] = useState<number>(0);
     const [cities, setCities] = useState<City[]>([]);
     const [userRequests, setUserRequests] = useState<UserRequest[]>([]);
 
     const loadRequestsCount = () => {
-        axios.get(`http://localhost:3002/api/stats/requests`, { withCredentials: true })
+        axios.get(`http://backend:3002/api/stats/requests`, { headers: { "Content-Type": "application/json" }, withCredentials: true })
             .then(e => setCount(e.data.count))
             .catch(() => {
-                if (retryNumber >= 0 && count === 0) {
-                    setTimeout(loadRequestsCount, 500)
+                if (retryNumber-- >= 0 && count === 0) {
+                    setTimeout(loadRequestsCount, 1000)
                 } else {
                     console.log(`Failed to load requests count.`);
                 }
             })
     };
     const loadCities = () => {
-        axios.get(`http://localhost:3002/api/stats/top/cities`, { withCredentials: true })
+        axios.get(`http://backend:3002/api/stats/top/cities`, { headers: { "Content-Type": "application/json" }, withCredentials: true })
             .then(e => setCities(e.data)).catch(() => {
-                if (retryNumber >= 0 && cities.length === 0) {
-                    setTimeout(loadCities, 500);
+                if (retryNumber-- >= 0 && cities.length === 0) {
+                    setTimeout(loadCities, 1000);
                 } else {
                     console.log(`Failed to load cities.`);
                 }
             });
     }
     const loadLatestRequests = () => {
-        axios.get(`http://localhost:3002/api/stats/latest/requests`, { withCredentials: true })
+        axios.get(`http://backend:3002/api/stats/latest/requests`, { headers: { "Content-Type": "application/json" }, withCredentials: true })
             .then(e => setUserRequests(e.data)).catch(() => {
-                if (retryNumber >= 0 && userRequests.length === 0) {
-                    loadLatestRequests();
+                if (retryNumber-- >= 0 && userRequests.length === 0) {
+                    setTimeout(loadLatestRequests, 1000);
                 } else {
                     console.log(`Failed to load user requests.`);
                 }

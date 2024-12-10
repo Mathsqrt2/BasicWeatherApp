@@ -32,7 +32,8 @@ export const Homepage: FC = () => {
         let isSuccess: boolean = false;
         try {
 
-            const response = await Axios.get<WeatherReport>(`http://localhost:3002/api/weather/${city}`);
+            const response = await Axios.get<WeatherReport>(`http://backend:3002/api/weather/${city}`,
+                { headers: { "Content-Type": "application/json" } });
 
             if (response.status !== 200) {
                 isSuccess = false;

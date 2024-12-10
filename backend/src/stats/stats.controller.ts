@@ -1,4 +1,7 @@
-import { Controller, Get, HttpStatus, Inject, Res, UseGuards } from "@nestjs/common";
+import {
+    Controller, Get, HttpStatus, Inject,
+    Res, UseGuards
+} from "@nestjs/common";
 import { Response } from "express";
 import { AuthGuard } from "src/auth/auth.guard";
 import { Query } from "src/typeorm/query/query.entity";
