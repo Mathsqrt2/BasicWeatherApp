@@ -1,0 +1,54 @@
+.loginForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 32pt;
+
+	border-radius: 12px;
+	padding: 42px;
+	background-color: white;
+	box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
+}
+
+.inputWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 5pt;
+}
+
+.loginSubmit {
+	transition: all 0.3s ease-in-out;
+    cursor: pointer;
+	padding: 8px 12px;
+    color: white;
+    border-radius: 5px;
+    background-color: #4191fa;
+	border: none;
+}
+
+.loginSubmit:hover {
+	transform: scale(0.95);
+    box-shadow: 0 0 16px rgb(0,0,0,0.1);
+}
+
+.loginInput {
+	width: 200px;
+}
+
+.passwordWrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.passwordInput {
+	width: 160px;
+}
+
+.toggleInput {
+	width: 35px;
+}
+
+.input {
+	border-bottom: 2px solid red;
+}

@@ -1,5 +1,9 @@
 .appContent {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8% 5%;
 
 	min-height: calc(100dvh - 70pt);
     background-color: rgb(230, 230, 230);

@@ -1,0 +1,23 @@
+.appNavigation {
+	color: white;
+}
+
+.navList {
+	display: flex;
+	gap: 20px;
+	list-style-type: none;
+}
+
+.navListItem {
+	display: inline-block;
+}
+
+.navLink {
+	color: white;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+.navLink:hover {
+	color: #cef5ff;
+}
