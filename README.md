@@ -15,7 +15,7 @@ OPEN_WEAHTER_API_KEY=
 JWT_SECRET=
 ~~~~
 
-Then and app 
+After use command below, app will be available on port 80
 
 ~~~~
 docker-compose up --build
