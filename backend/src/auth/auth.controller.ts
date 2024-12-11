@@ -1,6 +1,6 @@
 import {
     BadRequestException, Body, Controller,
-    Get, HttpStatus, Post, Req, Res
+    HttpStatus, Post, Req, Res
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoginDTO } from "./DTOs/login.dto";

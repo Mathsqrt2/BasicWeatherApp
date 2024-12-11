@@ -19,7 +19,6 @@ export class AuthService {
 
     private isPasswordHashEqual = (password: string, hash: string): boolean => {
 
-
         if (SHA512(password).toString() !== hash) {
             return false;
         }
@@ -53,6 +52,7 @@ export class AuthService {
         } catch (err) {
             throw new InternalServerErrorException(`Failed to sign token.`);
         }
+
     }
 
 }

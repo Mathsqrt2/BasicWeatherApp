@@ -4,7 +4,6 @@ import { queryProvider } from "./typeorm/query/query.providers";
 import { weatherProvider } from "./typeorm/weather/weather.providers";
 
 export const providers = [
-
     {
         provide: `DATA_SOURCE`,
         useFactory: async () => {

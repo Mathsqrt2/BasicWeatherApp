@@ -1,6 +1,6 @@
 import {
-    Controller, Get, HttpStatus, Inject,
-    Res, UseGuards
+    Controller, Get, HttpStatus,
+    Inject, Res, UseGuards
 } from "@nestjs/common";
 import { Response } from "express";
 import { AuthGuard } from "src/auth/auth.guard";
@@ -68,5 +68,4 @@ export class StatsController {
             res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

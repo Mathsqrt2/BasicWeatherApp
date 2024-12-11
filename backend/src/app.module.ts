@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
@@ -21,11 +19,8 @@ import { HttpModule } from '@nestjs/axios';
     AuthModule,
     WeatherModule,
     StatsModule,
-
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     ...providers
   ],
   exports: [

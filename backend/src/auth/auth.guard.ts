@@ -1,4 +1,7 @@
-import { CanActivate, ExecutionContext, Inject, Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+    CanActivate, ExecutionContext,
+    Inject, Injectable, UnauthorizedException
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "src/typeorm/user/user.entity";
 import { Repository } from "typeorm";
@@ -39,7 +42,7 @@ export class AuthGuard implements CanActivate {
             console.error(`Failed to authorize user. Error: ${err.message}. Date: ${new Date().toLocaleString(`pl-PL`)}`);
             throw new UnauthorizedException();
         }
-        
+
         return true;
     }
 }

@@ -150,8 +150,7 @@ export class WeatherService {
 
         }
 
-        response += ` Current atmospheric pressure: ${res.data.main.pressure} (hPa).`
-
+        response += ` Current atmospheric pressure: ${res.data.main.pressure} (hPa).`;
         switch (this.rateTemperature(temperature)) {
             case 4: response += ` The temperature is too high. ${temperature}°C`
                 break;
@@ -184,9 +183,9 @@ export class WeatherService {
     public findCurrentWeatherFor = async (city: string, { ip }: Request): Promise<WeatherReport> => {
 
         let query: Query = await this.query.save({ timestamp: Date.now(), city, ip });
-        const TheOneDayBack = Date.now() - 1000;
+        const oneHourBack = Date.now() - 1000 * 60 * 60;
         const cachedResponse = await this.weather.findOne({
-            where: { city, timestamp: MoreThanOrEqual(TheOneDayBack) },
+            where: { city, timestamp: MoreThanOrEqual(oneHourBack) },
             order: { timestamp: `DESC` }
         })
 

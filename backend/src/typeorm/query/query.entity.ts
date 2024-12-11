@@ -1,7 +1,6 @@
 import {
     Column, Entity, Generated,
-    JoinColumn,
-    ManyToOne,
+    JoinColumn, ManyToOne,
     PrimaryGeneratedColumn, Timestamp
 } from "typeorm";
 import { Weather } from "../weather/weather.entity";
@@ -30,6 +29,5 @@ export class Query {
 
     @Column()
     timestamp: number;
-
 
 }

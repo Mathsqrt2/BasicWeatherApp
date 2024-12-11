@@ -9,12 +9,21 @@ All you need to run the application is your own token from [oenweathermap](https
 and your secret key to secure the tokens.
 
 /backend/.env
+
 ~~~
 OPEN_WEAHTER_API_KEY=
 JWT_SECRET=
 ~~~~
 
 Then and app 
+
 ~~~~
 docker-compose up --build
 ~~~~
+
+### TechStack
+
+- React
+- TypeScript
+- NestJS
+- TypeORM
